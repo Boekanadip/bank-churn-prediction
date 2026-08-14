@@ -1,2 +1,1 @@
-# bank-churn-prediction
--
+# bank-customer-churn-prediction-system
