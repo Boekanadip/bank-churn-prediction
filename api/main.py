@@ -21,8 +21,8 @@ from pydantic import BaseModel, Field
 # 1. Load model & preprocessor SEKALI saja saat server start
 #    (bukan setiap ada request — supaya API responsif/cepat)
 # =========================================================
-MODEL_PATH = "model.pkl"
-PREPROCESSOR_PATH = "preprocessor.pkl"
+MODEL_PATH = "src/model.pkl"
+PREPROCESSOR_PATH = "src/preprocessor.pkl"
 
 model = joblib.load(MODEL_PATH)
 preprocessor = joblib.load(PREPROCESSOR_PATH)
