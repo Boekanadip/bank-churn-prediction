@@ -1,106 +1,112 @@
 # Bank Customer Churn Prediction
 
-Machine Learning system for predicting the probability of customer churn based on customer demographic, financial, and account activity information.
+Project Machine Learning untuk memprediksi kemungkinan **customer churn** pada nasabah bank berdasarkan karakteristik demografi, kondisi finansial, dan aktivitas nasabah.
 
-The project covers the end-to-end Data Science workflow, from data preprocessing and exploratory data analysis (EDA), model training and evaluation, to model serving through a REST API using FastAPI.
-
----
-
-## Project Overview
-
-Customer churn prediction can help identify customers who have a higher probability of leaving a bank.
-
-The objective of this project is to build a classification model that predicts:
-
-* Whether a customer is likely to churn
-* The probability of customer churn
-* A risk level based on the predicted churn probability
-
-The trained model is exposed through a FastAPI endpoint so that the prediction service can be consumed by other applications, such as a backend application or customer management system.
+Project ini mencakup proses **Data Science end-to-end**, mulai dari data understanding, data cleaning, exploratory data analysis (EDA), preprocessing, pelatihan dan evaluasi model Machine Learning, hingga implementasi model sebagai REST API menggunakan **FastAPI**.
 
 ---
 
-## Project Workflow
+## Tujuan Project
+
+Customer churn merupakan kondisi ketika nasabah berhenti menggunakan layanan atau produk suatu bank.
+
+Tujuan dari project ini adalah membangun model klasifikasi yang dapat:
+
+* Memprediksi apakah seorang nasabah berpotensi melakukan churn.
+* Menghasilkan probabilitas churn.
+* Mengelompokkan tingkat risiko churn berdasarkan probabilitas prediksi.
+* Menyediakan hasil prediksi melalui API agar dapat diintegrasikan dengan aplikasi lain.
+
+Model Machine Learning yang telah dilatih kemudian digunakan oleh FastAPI sebagai layanan prediksi yang dapat dikonsumsi oleh software atau backend application.
+
+---
+
+## Alur Project
 
 ```text
-Raw Dataset
-    │
-    ▼
-Data Understanding & EDA
-    │
-    ▼
-Data Cleaning & Preprocessing
-    │
-    ├── Missing Value Handling
-    ├── Numerical Feature Scaling
-    └── Categorical Feature Encoding
-    │
-    ▼
+Data
+  │
+  ▼
+Data Understanding
+  │
+  ▼
+Data Cleaning & EDA
+  │
+  ▼
+Data Preprocessing
+  │
+  ├── Numerical Feature Processing
+  └── Categorical Feature Processing
+  │
+  ▼
 Train-Test Split
-    │
-    ▼
+  │
+  ▼
 Model Training
-    │
-    ├── Logistic Regression
-    ├── Random Forest
-    └── XGBoost
-    │
-    ▼
+  │
+  ├── Logistic Regression
+  ├── Random Forest
+  └── XGBoost
+  │
+  ▼
 Model Evaluation
-    │
-    ▼
-Best Model Selection
-    │
-    ▼
+  │
+  ▼
+Pemilihan Model Terbaik
+  │
+  ▼
 model.pkl + preprocessor.pkl
-    │
-    ▼
+  │
+  ▼
 FastAPI
-    │
-    ▼
-POST /predict
-    │
-    ▼
-Churn Probability & Risk Level
+  │
+  ▼
+Endpoint Prediction
+  │
+  ▼
+Hasil Prediksi Churn
 ```
 
 ---
 
 ## Dataset
 
-The project uses the **Bank Customer Churn Prediction** dataset.
+Project menggunakan dataset **Bank Customer Churn Prediction**.
 
-### Main Features
+Dataset berisi informasi mengenai karakteristik dan aktivitas nasabah yang digunakan untuk memprediksi status churn.
 
-| Feature            | Description                               |
-| ------------------ | ----------------------------------------- |
-| `customer_id`      | Unique customer identifier                |
-| `credit_score`     | Customer credit score                     |
-| `country`          | Customer country                          |
-| `gender`           | Customer gender                           |
-| `age`              | Customer age                              |
-| `tenure`           | Number of years as a bank customer        |
-| `balance`          | Customer account balance                  |
-| `products_number`  | Number of bank products used              |
-| `credit_card`      | Whether the customer has a credit card    |
-| `active_member`    | Whether the customer is an active member  |
-| `estimated_salary` | Estimated customer salary                 |
-| `churn`            | Target variable indicating customer churn |
+### Fitur yang Digunakan
 
-`customer_id` is used only as an identifier and is not used as a model feature.
+| Fitur              | Deskripsi                             |
+| ------------------ | ------------------------------------- |
+| `customer_id`      | ID unik nasabah                       |
+| `credit_score`     | Skor kredit nasabah                   |
+| `country`          | Negara tempat nasabah berada          |
+| `gender`           | Jenis kelamin nasabah                 |
+| `age`              | Usia nasabah                          |
+| `tenure`           | Lama nasabah menggunakan layanan bank |
+| `balance`          | Saldo rekening nasabah                |
+| `products_number`  | Jumlah produk bank yang digunakan     |
+| `credit_card`      | Kepemilikan kartu kredit              |
+| `active_member`    | Status keaktifan nasabah              |
+| `estimated_salary` | Estimasi gaji nasabah                 |
+| `churn`            | Target yang menunjukkan status churn  |
+
+`customer_id` digunakan sebagai identifier dan tidak digunakan sebagai fitur untuk proses prediksi.
 
 ---
 
 ## Data Preprocessing
 
-The preprocessing pipeline is implemented using Scikit-learn `Pipeline` and `ColumnTransformer`.
+Tahap preprocessing dilakukan untuk mempersiapkan data sebelum digunakan oleh model Machine Learning.
 
-### Numerical Features
+Preprocessing dilakukan menggunakan komponen dari **Scikit-learn**, termasuk `Pipeline` dan `ColumnTransformer`.
 
-The following numerical features are processed using:
+### Fitur Numerik
 
-1. Median imputation
-2. Standard scaling
+Fitur numerik diproses melalui tahapan preprocessing yang sesuai dengan pipeline training.
+
+Contoh fitur numerik:
 
 ```text
 credit_score
@@ -111,12 +117,11 @@ products_number
 estimated_salary
 ```
 
-### Categorical Features
+### Fitur Kategorikal
 
-The following categorical features are processed using:
+Fitur kategorikal diproses menggunakan encoding agar dapat digunakan oleh model Machine Learning.
 
-1. Most-frequent imputation
-2. One-hot encoding
+Contoh fitur kategorikal:
 
 ```text
 country
@@ -125,25 +130,25 @@ credit_card
 active_member
 ```
 
-The preprocessing pipeline is saved as:
+Pipeline preprocessing yang telah di-fit pada data training disimpan dalam:
 
 ```text
-preprocessor.pkl
+src/preprocessor.pkl
 ```
 
-This pipeline must be reused during model serving to ensure that incoming API data receives the same preprocessing treatment as the training data.
+File tersebut digunakan kembali pada saat inference agar data yang masuk melalui API mendapatkan preprocessing yang konsisten dengan data saat training.
 
 ---
 
-## Machine Learning
+## Model Machine Learning
 
-Several classification models are trained and compared:
+Beberapa algoritma Machine Learning digunakan dan dibandingkan dalam proses pengembangan model:
 
 * Logistic Regression
-* Random Forest
+* Decision Tree / Random Forest
 * XGBoost
 
-Model evaluation considers multiple classification metrics, including:
+Evaluasi model dilakukan menggunakan beberapa metrik klasifikasi, yaitu:
 
 * Accuracy
 * Precision
@@ -151,125 +156,92 @@ Model evaluation considers multiple classification metrics, including:
 * F1-Score
 * ROC-AUC
 
-Because the target variable is imbalanced, model selection should not rely solely on accuracy.
+Pemilihan model tidak hanya berdasarkan accuracy, tetapi juga mempertimbangkan metrik lain yang relevan terhadap kebutuhan prediksi churn.
 
-The final production model is stored as:
+Model yang dipilih kemudian disimpan dalam format pickle sebagai:
 
 ```text
+src/model.pkl
+```
+
+Model tersebut digunakan oleh FastAPI untuk melakukan inference terhadap data baru.
+
+---
+
+## Model Artifacts
+
+Project menggunakan dua file utama untuk proses inference:
+
+```text
+src/
+├── model.pkl
+└── preprocessor.pkl
+```
+
+### `model.pkl`
+
+Berisi model Machine Learning yang telah dilatih dan digunakan untuk menghasilkan prediksi churn.
+
+### `preprocessor.pkl`
+
+Berisi preprocessing pipeline yang telah di-fit pada data training.
+
+Kedua file tersebut merupakan satu kesatuan dalam proses inference:
+
+```text
+Data Input
+    │
+    ▼
+preprocessor.pkl
+    │
+    ▼
+Transformed Data
+    │
+    ▼
 model.pkl
+    │
+    ▼
+Prediction
 ```
 
-> The current `model.pkl` in this repository is an XGBoost classifier. The API model version should therefore reflect the actual production model.
+> `model.pkl` dan `preprocessor.pkl` harus berasal dari proses training yang kompatibel. Perubahan terhadap fitur atau preprocessing perlu diikuti dengan proses training dan penyimpanan ulang kedua artifact tersebut.
 
 ---
 
-## Model Serving
+## FastAPI
 
-The trained model is served using **FastAPI**.
+Model Machine Learning disediakan melalui REST API menggunakan **FastAPI**.
 
-The API performs the following process:
+FastAPI bertindak sebagai penghubung antara model Machine Learning dengan aplikasi yang dikembangkan oleh software developer.
+
+Alur integrasinya:
 
 ```text
-Client Application
-      │
-      ▼
-POST /predict
-      │
-      ▼
-Request Validation
-      │
-      ▼
-Preprocessing
-      │
-      ▼
-XGBoost Model
-      │
-      ▼
-Churn Probability
-      │
-      ▼
-Risk Classification
-      │
-      ▼
-JSON Response
+Software / Backend Application
+            │
+            │ HTTP Request
+            ▼
+       FastAPI Service
+            │
+            ▼
+    Request Validation
+            │
+            ▼
+    preprocessor.pkl
+            │
+            ▼
+        model.pkl
+            │
+            ▼
+     Prediction Result
+            │
+            ▼
+       JSON Response
 ```
 
 ---
 
-## API Endpoints
-
-### Health Check
-
-```http
-GET /health
-```
-
-Example response:
-
-```json
-{
-  "status": "ok",
-  "model_loaded": true
-}
-```
-
-This endpoint can be used by the backend or DevOps team to verify that the ML service is running and the model has been loaded successfully.
-
----
-
-### Churn Prediction
-
-```http
-POST /predict
-```
-
-Example request:
-
-```json
-{
-  "customer_id": "a1b2c3d4-e5f6-47a8-9b12-cd34ef567890",
-  "credit_score": 650,
-  "country": "France",
-  "gender": "Female",
-  "age": 42,
-  "tenure": 5,
-  "balance": 125000.50,
-  "products_number": 2,
-  "credit_card": 1,
-  "active_member": 1,
-  "estimated_salary": 78000.00
-}
-```
-
-Example response:
-
-```json
-{
-  "customer_id": "a1b2c3d4-e5f6-47a8-9b12-cd34ef567890",
-  "churn_probability": 0.7345,
-  "churn_percentage": 73,
-  "risk_level": "Merah",
-  "model_version": "v1.0-xgboost"
-}
-```
-
----
-
-## Risk Level
-
-The API converts the predicted churn probability into three risk levels:
-
-| Probability     | Risk Level |
-| --------------- | ---------- |
-| `< 0.30`        | Hijau      |
-| `0.30 – < 0.70` | Kuning     |
-| `>= 0.70`       | Merah      |
-
-These thresholds are currently implemented in the ML API layer so that the business logic remains consistent across consuming applications.
-
----
-
-## Project Structure
+## Struktur Project
 
 ```text
 bank-churn-prediction/
@@ -296,30 +268,43 @@ bank-churn-prediction/
 └── LESSON_LEARNED_TEMPLATE.md
 ```
 
+### Penjelasan Folder
+
+| Folder/File        | Fungsi                                                           |
+| ------------------ | ---------------------------------------------------------------- |
+| `api/`             | Berisi kode FastAPI untuk menyediakan layanan prediksi           |
+| `data/`            | Berisi dataset yang digunakan dalam pengembangan model           |
+| `notebooks/`       | Berisi notebook dan script untuk EDA serta workflow Data Science |
+| `src/`             | Berisi kode preprocessing, training, serta model artifacts       |
+| `model.pkl`        | Model Machine Learning hasil training                            |
+| `preprocessor.pkl` | Preprocessing pipeline hasil training                            |
+| `README.md`        | Dokumentasi project                                              |
+| `requirements.txt` | Daftar dependency Python yang digunakan                          |
+
 ---
 
-## Installation
+## Instalasi
 
-Clone the repository:
+Clone repository:
 
 ```bash
 git clone https://github.com/Boekanadip/bank-churn-prediction.git
 cd bank-churn-prediction
 ```
 
-Create a virtual environment:
+Buat virtual environment:
 
 ```bash
 python -m venv .venv
 ```
 
-Activate the environment on Windows:
+Aktifkan virtual environment pada Windows:
 
 ```bash
 .venv\Scripts\activate
 ```
 
-Install dependencies:
+Install dependency:
 
 ```bash
 pip install -r requirements.txt
@@ -327,116 +312,225 @@ pip install -r requirements.txt
 
 ---
 
-## Running the API
+## Menjalankan FastAPI
 
-Before starting the API, make sure the following model artifacts are available in the location expected by `api/main.py`:
+Pastikan file berikut tersedia:
 
 ```text
-model.pkl
-preprocessor.pkl
+src/model.pkl
+src/preprocessor.pkl
 ```
 
-Run FastAPI using Uvicorn:
+Kemudian jalankan FastAPI:
 
 ```bash
 uvicorn api.main:app --reload
 ```
 
-The API will be available locally at:
+Setelah berhasil dijalankan, API dapat diakses melalui:
 
 ```text
 http://127.0.0.1:8000
 ```
 
-Interactive API documentation is available at:
+Dokumentasi interaktif FastAPI tersedia pada:
 
 ```text
 http://127.0.0.1:8000/docs
 ```
 
----
-
-## Model Artifacts
-
-The model serving system requires two artifacts:
-
-### `model.pkl`
-
-The trained machine learning model used to generate churn predictions.
-
-### `preprocessor.pkl`
-
-The fitted Scikit-learn preprocessing pipeline used to transform incoming customer data before prediction.
-
-Both artifacts must be generated from the same training pipeline to prevent preprocessing mismatch between training and production.
+Swagger UI pada `/docs` dapat digunakan untuk mencoba endpoint prediction secara langsung.
 
 ---
 
-## Data Science Contribution
+## API Endpoint
 
-The Data Science workflow in this project includes:
+### Health Check
+
+```http
+GET /health
+```
+
+Endpoint ini digunakan untuk memastikan bahwa service API berjalan dan model berhasil dimuat.
+
+Contoh response:
+
+```json
+{
+  "status": "ok",
+  "model_loaded": true
+}
+```
+
+---
+
+### Prediksi Churn
+
+```http
+POST /predict
+```
+
+Endpoint ini menerima data nasabah dan mengembalikan hasil prediksi churn.
+
+Contoh request:
+
+```json
+{
+  "customer_id": "a1b2c3d4",
+  "credit_score": 650,
+  "country": "France",
+  "gender": "Female",
+  "age": 42,
+  "tenure": 5,
+  "balance": 125000.50,
+  "products_number": 2,
+  "credit_card": 1,
+  "active_member": 1,
+  "estimated_salary": 78000.00
+}
+```
+
+Contoh response:
+
+```json
+{
+  "customer_id": "a1b2c3d4",
+  "churn_probability": 0.7345,
+  "churn_percentage": 73,
+  "risk_level": "Merah",
+  "model_version": "v1.0-xgboost"
+}
+```
+
+Nilai response di atas merupakan **contoh format response**, bukan hasil prediksi aktual.
+
+---
+
+## Klasifikasi Risiko
+
+Probabilitas churn kemudian dapat dikelompokkan menjadi tiga tingkat risiko:
+
+| Probabilitas Churn | Tingkat Risiko |
+| ------------------ | -------------- |
+| `< 0.30`           | Hijau          |
+| `0.30 – < 0.70`    | Kuning         |
+| `>= 0.70`          | Merah          |
+
+Interpretasi:
+
+* **Hijau** → probabilitas churn relatif rendah.
+* **Kuning** → probabilitas churn berada pada tingkat menengah.
+* **Merah** → probabilitas churn relatif tinggi.
+
+Threshold tersebut merupakan aturan bisnis pada layer API dan dapat disesuaikan apabila terdapat kebutuhan bisnis yang berbeda.
+
+---
+
+## Peran dalam Pengembangan Sistem
+
+Project ini dikembangkan dengan pemisahan tanggung jawab antara Data Science dan Software Development.
+
+### Data Science
+
+Bagian Data Science mencakup:
 
 * Data understanding
 * Data cleaning
 * Exploratory Data Analysis
+* Data preprocessing
 * Feature preparation
-* Preprocessing pipeline development
 * Model training
 * Model comparison
 * Model evaluation
-* Model selection
-* Model serialization
-* ML API development
-* API integration support for software development
+* Pemilihan model terbaik
+* Penyimpanan model dalam bentuk `model.pkl`
+* Penyimpanan preprocessing pipeline dalam bentuk `preprocessor.pkl`
+* Penyediaan model melalui FastAPI
+* Dokumentasi kebutuhan integrasi model
 
-The final model is prepared as a deployable artifact and exposed through FastAPI for integration with other software systems.
+### Software Development
+
+Software developer menggunakan endpoint FastAPI untuk mengintegrasikan model Machine Learning ke dalam aplikasi atau sistem yang dikembangkan.
+
+Dengan pendekatan ini, model Machine Learning tidak perlu ditanamkan langsung ke dalam aplikasi utama. Aplikasi cukup mengirimkan data melalui API dan menerima hasil prediksi dalam format JSON.
 
 ---
 
-## Software Integration
-
-The ML service is designed to work as a separate prediction service.
+## Alur Integrasi dengan Software
 
 ```text
-                    ┌─────────────────────┐
-                    │   Client / Backend   │
-                    │   Application        │
-                    └──────────┬──────────┘
-                               │
-                         HTTP Request
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │      FastAPI        │
-                    │    ML Service       │
-                    └──────────┬──────────┘
-                               │
-                     Preprocessing
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │   XGBoost Model     │
-                    │     model.pkl       │
-                    └──────────┬──────────┘
-                               │
-                     Prediction Result
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │   JSON Response     │
-                    │ Probability + Risk  │
-                    └─────────────────────┘
+┌───────────────────────────┐
+│    Software Application   │
+│       / Backend           │
+└─────────────┬─────────────┘
+              │
+              │ POST /predict
+              ▼
+┌───────────────────────────┐
+│         FastAPI           │
+│       ML Service          │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│    preprocessor.pkl       │
+│     Data Transformation   │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│        model.pkl          │
+│    Churn Classification   │
+└─────────────┬─────────────┘
+              │
+              ▼
+┌───────────────────────────┐
+│      JSON Response        │
+│ Probability + Risk Level  │
+└───────────────────────────┘
 ```
-
-This separation allows the software application and machine learning model to be developed and maintained independently.
 
 ---
 
-## Important Notes
+## Catatan Pengembangan
 
-* `customer_id` is not used as a model feature.
-* The same preprocessing pipeline must be used during training and inference.
-* `model.pkl` and `preprocessor.pkl` should be treated as a matching pair.
-* Model version information in the API should match the actual serialized model.
-* Changes to model features or preprocessing logic require retraining and regeneration of the model artifacts.
-* The dataset used in this repository should not be replaced with confidential production customer data.
+Beberapa hal perlu diperhatikan ketika melakukan perubahan terhadap model:
+
+1. Perubahan fitur input dapat memerlukan perubahan pada preprocessing pipeline.
+2. Perubahan preprocessing harus diikuti dengan training ulang model.
+3. `model.pkl` dan `preprocessor.pkl` harus dibuat dari pipeline training yang kompatibel.
+4. Jika model diganti, `model_version` pada API perlu diperbarui.
+5. Struktur request API harus tetap konsisten dengan fitur yang digunakan model.
+6. Dataset produksi yang mengandung informasi sensitif tidak boleh dimasukkan ke repository publik.
+7. Model artifact yang digunakan pada production sebaiknya memiliki versioning yang jelas.
+
+---
+
+## Teknologi yang Digunakan
+
+* Python
+* Pandas
+* NumPy
+* Scikit-learn
+* XGBoost
+* Matplotlib
+* Seaborn
+* FastAPI
+* Uvicorn
+* Joblib
+
+---
+
+## Repository
+
+Repository project:
+
+`https://github.com/Boekanadip/bank-churn-prediction`
+
+---
+
+## Status Project
+
+**Status:** Model Machine Learning dan REST API telah disiapkan untuk integrasi dengan software application.
+
+Project ini merupakan implementasi workflow Data Science yang menghubungkan proses pengembangan model Machine Learning dengan kebutuhan integrasi Software Development.
