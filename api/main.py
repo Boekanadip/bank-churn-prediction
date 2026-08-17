@@ -130,7 +130,7 @@ def predict_churn(customer: CustomerProfile):
         churn_probability=round(churn_probability, 4),
         churn_percentage=round(churn_probability * 100),
         risk_level=get_risk_level(churn_probability),
-        model_version="v1.0-random-forest",
+        model_version="v1.0-xgboost",
     )
 
 
