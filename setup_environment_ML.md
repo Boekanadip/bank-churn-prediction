@@ -40,8 +40,8 @@ Berdasarkan pengalaman nyata selama sprint berjalan, ada 2 kemungkinan environme
 ### Step 1 — Clone Repository
 
 ```bash
-git clone <url-repo>
-cd bank-churn-prediction/ml-engine
+git clone https://github.com/Boekanadip/bank-churn-prediction
+cd bank-churn-prediction
 ```
 
 ### Step 2 — Buat Virtual Environment
