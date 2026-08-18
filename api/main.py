@@ -76,7 +76,7 @@ class ChurnPredictionResponse(BaseModel):
     customer_id: str
     churn_probability: float
     churn_percentage: int
-    risk_level: str
+    risk_level: str #belum fix kepake
     model_version: str
 
 
