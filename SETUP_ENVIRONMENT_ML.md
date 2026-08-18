@@ -46,7 +46,7 @@ cd bank-churn-prediction/ml-engine
 
 ### Step 2 — Buat Virtual Environment
 
-Wajib pakai virtual environment supaya library project ini nggak bentrok dengan project Python lain di komputer lo.
+Wajib pakai virtual environment supaya library project ini nggak bentrok dengan project Python lain.
 
 ```bash
 # Buat environment
@@ -59,7 +59,7 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-> Tandanya berhasil: muncul `(venv)` di depan baris terminal lo.
+> Tandanya berhasil: muncul `(venv)` di depan baris terminal.
 
 ### Step 3 — Install Dependencies
 
@@ -90,8 +90,8 @@ Ada 2 opsi, pilih sesuai alur di bagian 0:
 - Lewati Step 5, langsung lanjut ke Step 6 (Jalankan API Server)
 
 **Opsi B — Mau reproduce dari awal secara lokal:**
-- Download dataset dari [sumber dataset — isi link Kaggle/data internal bank]
-- Taruh file di folder `data/raw/`
+- Download dataset dari [https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset]
+- Taruh file di folder `data`
 - **Jangan commit file dataset mentah ke Git** kalau ukurannya besar (sudah di-exclude lewat `.gitignore`)
 - Lanjut ke Step 5
 
@@ -144,7 +144,7 @@ Response yang diharapkan sesuai `API_Contract_Churn_Prediction.md`.
 
 ## 3. Masalah Umum & Solusi (FAQ Setup)
 
-> Bagian ini diisi terus selama sprint berjalan — begitu ada anggota tim yang nemu masalah setup, tambahkan di sini supaya orang berikutnya nggak stuck di masalah yang sama.
+> Bagian ini berisikan masalah saat setup, tambahkan di sini supaya orang berikutnya tidak stuck di masalah yang sama.
 
 | Masalah | Kemungkinan Penyebab | Solusi |
 |---|---|---|
@@ -156,14 +156,14 @@ Response yang diharapkan sesuai `API_Contract_Churn_Prediction.md`.
 
 ---
 
-## 4. Struktur Folder ML Engine
+## 4. Struktur Folder ML Engine (Sementara)
 
 ```
 ml-engine/
 ├── data/
-│   ├── raw/              # Dataset asli, tidak diubah
-│   └── processed/        # Hasil preprocessing, siap dipakai training
+│   Bank Customer Churn Prediction.cvs
 ├── notebooks/
+│   └── .ipynb # code lengkap mulai dari persiapan-penyimpanan model
 │   └── eda_bank_churn.py # Analisis eksploratif
 ├── src/
 │   ├── preprocessing.py  # Pipeline cleaning, encoding, scaling
@@ -181,5 +181,5 @@ ml-engine/
 
 | Bagian | Nama | Kontak |
 |---|---|---|
-| ML Engine (keseluruhan) | | |
-| API Serving | | |
+| ML Engine (keseluruhan) | Adib Raihan Ashidiq | Email: adib.raihann@gmail.com |
+| API Serving | Adib Raihan Ashidiq | Email: adib.raihann@gmail.com |
