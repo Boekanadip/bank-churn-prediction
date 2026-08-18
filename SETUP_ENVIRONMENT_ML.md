@@ -159,14 +159,15 @@ Response yang diharapkan sesuai `API_Contract_Churn_Prediction.md`.
 ## 4. Struktur Folder ML Engine (Sementara)
 
 ```
-ml-engine/
+bank-churn-prediction/
 ├── data/
 │   Bank Customer Churn Prediction.cvs
 ├── notebooks/
-│   └── .ipynb # code lengkap mulai dari persiapan-penyimpanan model
+│   └── Bank_Churn_DS_Workflow.ipynb # code lengkap mulai dari persiapan-penyimpanan model
 │   └── eda_bank_churn.py # Analisis eksploratif
 ├── src/
 │   ├── preprocessing.py  # Pipeline cleaning, encoding, scaling
+│   ├── preprocessor.pkl  # Untuk Pembersihan inputan 
 │   ├── train.py          # Training & evaluasi model
 │   └── model.pkl         # Model hasil training (bukan source code, hasil biner)
 ├── api/
