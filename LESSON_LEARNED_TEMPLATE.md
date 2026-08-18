@@ -23,19 +23,16 @@
 
 ## 2. Kendala Spesifik Integrasi ML ↔ Backend
 
-Bagian ini fokus ke masalah yang paling sering terjadi di project seperti ini — integrasi antara ML Engine (FastAPI) dan Core App (Laravel). Isi berdasarkan pengalaman nyata tim.
+Bagian ini fokus ke masalah yang paling sering terjadi di project seperti ini — integrasi antara ML Engine (FastAPI) dan Core App (Laravel). Berdasarkan pengalaman nyata tim.
 
 ### 2.1 Ketidakcocokan Format Data
-_Contoh yang perlu diisi: field apa yang sempat beda format, gimana cara nemuinnya, gimana solusinya (misal: sepakati ulang API contract, tambah validasi, dll)_
 
 ### 2.2 Masalah UUID
-_Contoh yang perlu diisi: apakah ada masalah waktu passing UUID antara Laravel dan FastAPI (misal: format UUID versi berapa, ada kesalahan tipe data, dll)_
 
 ### 2.3 Response Time / Performance
-_Contoh yang perlu diisi: apakah API ML sempat lambat, apa penyebabnya (misal model terlalu besar, tidak ada caching), dan solusinya_
+_API ML sempat lambat, penyebabnya tidak ada caching._
 
 ### 2.4 Error Handling
-_Contoh yang perlu diisi: skenario apa yang bikin API error tak terduga, dan bagaimana akhirnya ditangani di kedua sisi_
 
 ---
 
@@ -44,34 +41,26 @@ _Contoh yang perlu diisi: skenario apa yang bikin API error tak terduga, dan bag
 Bagian reflektif — tulis di akhir sprint, berdasarkan pengalaman keseluruhan tim.
 
 - **Kalau bisa mulai dari awal lagi, apa yang akan disiapkan lebih dulu?**
-  _(contoh: sepakati API contract lebih detail sebelum coding dimulai, bukan sambil jalan)_
-
-- **Proses mana yang paling makan waktu tapi sebenarnya bisa lebih cepat?**
-  _(isi)_
-
-- **Tools/library apa yang ternyata sangat membantu, dan mana yang sebaiknya dihindari?**
-  _(isi)_
+  _sepakati API contract lebih detail sebelum coding dimulai, bukan sambil jalan_
 
 ---
 
 ## 4. Rekomendasi untuk Tim Berikutnya (Onboarding)
 
-Bagian ini yang paling penting untuk KMS — tulis seolah menjelaskan ke orang yang benar-benar baru gabung project sejenis.
-
-- **3 hal yang harus dilakukan di awal sprint sebelum mulai coding:**
-  1.
+- **Hal yang harus dilakukan di awal sprint sebelum mulai coding:**
+  1. Diskusikan dengan tim Software Developer, API yang akan diterima serta strukturnya.
   2.
   3.
 
-- **3 kesalahan yang sebaiknya dihindari** (berdasarkan pengalaman project ini):
-  1.
-  2.
+- **Kesalahan yang sebaiknya dihindari** (berdasarkan pengalaman project ini):
+  1. Mulai dari kode terlebih dahulu ketimbang, diskusi dengan tim Software Developer.
+  2. Tidak Menyusun repository dengan baik dan benar.
   3.
 
 - **Dokumen/resource yang wajib dibaca duluan** sebelum mulai kerja:
   - `SETUP_ENVIRONMENT_ML.md`
   - `API_Contract_Churn_Prediction.md`
-  - _(tambahkan lainnya)_
+  - `README.MD`
 
 ---
 
