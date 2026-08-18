@@ -12,10 +12,10 @@
 |---|---|---|---|---|---|
 | 17 Agu | Setup Environment | VS Code sangat lambat / hang saat menjalankan cell pertama kali (proses baca file dataset & start kernel Jupyter tidak kunjung selesai) | Kombinasi 2 faktor: (1) RAM laptop terpakai ~80% oleh aplikasi lain, (2) antivirus/antimalware melakukan real-time scan pada folder project setiap kali file diakses, memperlambat proses baca file dan start kernel | Tambahkan folder project ke exclusion list antivirus (Windows Security → Virus & threat protection → Manage settings → Add or remove exclusions → Add folder project), tutup aplikasi lain yang tidak perlu untuk melonggarkan RAM, lalu restart VS Code | Adib Raihan Ashidiq |
 |  |  |  |  |  | |
-| | Data/Model | | | | |
-| | Database (UUID) | | | | |
-| | Deployment | | | | |
-| | Lainnya | | | | |
+| |  | | | | |
+| |  | | | | |
+| |  | | | | |
+| |  | | | | |
 
 **Kategori yang bisa dipakai:** Setup Environment, Integrasi API, Data/Model, Database (UUID), Autentikasi, Deployment, Komunikasi Tim, Lainnya.
 
