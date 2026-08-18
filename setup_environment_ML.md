@@ -161,7 +161,7 @@ Response yang diharapkan sesuai `API_Contract_Churn_Prediction.md`.
 ```
 bank-churn-prediction/
 ├── data/
-│   Bank Customer Churn Prediction.cvs
+│   Bank Customer Churn Prediction.csv
 ├── notebooks/
 │   └── Bank_Churn_DS_Workflow.ipynb # code lengkap mulai dari persiapan-penyimpanan model
 │   └── eda_bank_churn.py # Analisis eksploratif
