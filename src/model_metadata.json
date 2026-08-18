@@ -1,7 +1,6 @@
 {
 "model_name": "Bank Churn XGBoost",
   "model_type": "XGBClassifier",
-  "model_version": "1.0.0",
   "xgboost_version": "3.3.0",
   "sklearn_version": "1.6.1",
   "python_version": "3.13.2",
