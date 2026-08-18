@@ -10,8 +10,8 @@
 
 | Tanggal | Kategori | Masalah yang Dialami | Penyebab | Solusi | Dicatat oleh |
 |---|---|---|---|---|---|
-| _contoh:_ 15 Agu | Integrasi API | Tim Laravel dapat error 422 saat call endpoint `/predict` | Format `active_member` yang dikirim Laravel berupa boolean (`true`/`false`), sementara FastAPI expect integer (`0`/`1`) | Disepakati ulang: FastAPI terima keduanya via validasi Pydantic yang lebih fleksibel | _(nama)_ |
-| 17 Agu | Setup Environment | VS Code sangat lambat / hang saat menjalankan cell pertama kali (proses baca file dataset & start kernel Jupyter tidak kunjung selesai) | Kombinasi 2 faktor: (1) RAM laptop terpakai ~80% oleh aplikasi lain, (2) antivirus/antimalware melakukan real-time scan pada folder project setiap kali file diakses, memperlambat proses baca file dan start kernel | Tambahkan folder project ke exclusion list antivirus (Windows Security → Virus & threat protection → Manage settings → Add or remove exclusions → Add folder project), tutup aplikasi lain yang tidak perlu untuk melonggarkan RAM, lalu restart VS Code | _(nama)_ |
+| 17 Agu | Setup Environment | VS Code sangat lambat / hang saat menjalankan cell pertama kali (proses baca file dataset & start kernel Jupyter tidak kunjung selesai) | Kombinasi 2 faktor: (1) RAM laptop terpakai ~80% oleh aplikasi lain, (2) antivirus/antimalware melakukan real-time scan pada folder project setiap kali file diakses, memperlambat proses baca file dan start kernel | Tambahkan folder project ke exclusion list antivirus (Windows Security → Virus & threat protection → Manage settings → Add or remove exclusions → Add folder project), tutup aplikasi lain yang tidak perlu untuk melonggarkan RAM, lalu restart VS Code | Adib Raihan Ashidiq |
+|  |  |  |  |  | |
 | | Data/Model | | | | |
 | | Database (UUID) | | | | |
 | | Deployment | | | | |
