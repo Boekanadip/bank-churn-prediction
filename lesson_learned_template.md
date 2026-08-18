@@ -10,8 +10,9 @@
 
 | Tanggal | Kategori | Masalah yang Dialami | Penyebab | Solusi | Dicatat oleh |
 |---|---|---|---|---|---|
-| 17 Agu | Setup Environment | VS Code sangat lambat / hang saat menjalankan cell pertama kali (proses baca file dataset & start kernel Jupyter tidak kunjung selesai) | Kombinasi 2 faktor: (1) RAM laptop terpakai ~80% oleh aplikasi lain, (2) antivirus/antimalware melakukan real-time scan pada folder project setiap kali file diakses, memperlambat proses baca file dan start kernel | Tambahkan folder project ke exclusion list antivirus (Windows Security → Virus & threat protection → Manage settings → Add or remove exclusions → Add folder project), tutup aplikasi lain yang tidak perlu untuk melonggarkan RAM, lalu restart VS Code | Adib Raihan Ashidiq |
-|  |  |  |  |  | |
+| 17 Agustus | Setup Environment | VS Code sangat lambat / hang saat menjalankan cell pertama kali (proses baca file dataset & start kernel Jupyter tidak kunjung selesai) | Kombinasi 2 faktor: (1) RAM laptop terpakai ~80% oleh aplikasi lain, (2) antivirus/antimalware melakukan real-time scan pada folder project setiap kali file diakses, memperlambat proses baca file dan start kernel | Tambahkan folder project ke exclusion list antivirus (Windows Security → Virus & threat protection → Manage settings → Add or remove exclusions → Add folder project), tutup aplikasi lain yang tidak perlu untuk melonggarkan RAM, lalu restart VS Code | Adib raihan a. |
+| 18 Agustus | Data/Model | Model XGBoost yang dibuat pada environment tertentu mengalami masalah ketika digunakan pada environment dengan versi XGBoost berbeda | Ketidakcocokan versi library antara environment training dan environment serving | Samakan versi XGBoost antara training dan serving serta pin
+dependency pada requirements.txt | Adib raihan a. |
 | |  | | | | |
 | |  | | | | |
 | |  | | | | |
