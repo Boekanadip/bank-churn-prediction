@@ -2,8 +2,7 @@
 api/main.py
 
 Model Serving — FastAPI
-Endpoint REST yang menerima input profil nasabah dan mengembalikan
-"Probabilitas Churn" (0-100%), sesuai API_Contract_Churn_Prediction.md.
+Endpoint REST yang mengembalikan "Probabilitas Churn" (0-100%), sesuai API_Contract_Churn_Prediction.md.
 
 Cara jalanin:
     uvicorn main:app --reload --port 8000
