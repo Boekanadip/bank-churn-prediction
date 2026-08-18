@@ -101,7 +101,6 @@ def get_risk_level(probability: float) -> str:
 
 @app.post("/predict", response_model=ChurnPredictionResponse)
 def predict_churn(customer: CustomerProfile):
-    # Ubah request jadi DataFrame satu baris, dengan urutan kolom
     # yang sama persis seperti waktu training.
     input_df = pd.DataFrame([{
         "credit_score": customer.credit_score,
