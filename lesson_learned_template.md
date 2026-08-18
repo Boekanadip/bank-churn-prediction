@@ -68,4 +68,4 @@ Bagian reflektif — tulis di akhir sprint, berdasarkan pengalaman keseluruhan t
 
 | Nama | Role | Kontribusi |
 |---|---|---|
-| | | |
+| Adib raihan a. | Data Scientist | Pembersihan data hingga API End Point |
