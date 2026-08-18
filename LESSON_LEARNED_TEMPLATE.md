@@ -2,7 +2,7 @@
 
 **Tujuan dokumen:** Mencatat kendala nyata yang dialami selama project (khususnya soal integrasi antar tim ML dan Software Dev), beserta solusinya. Dokumen ini akan jadi basis Knowledge Management System (KMS) untuk onboarding tim di masa depan — jadi tulis dengan asumsi pembacanya adalah orang baru yang belum tahu apa-apa soal project ini.
 
-> **Cara pakai:** Isi tabel di bawah **selama sprint berjalan**, begitu masalah terjadi dan solusinya ketemu — jangan ditunda sampai akhir project, karena detailnya bisa lupa.
+> **Cara pakai:** Isi tabel di bawah **selama sprint berjalan**.
 
 ---
 
