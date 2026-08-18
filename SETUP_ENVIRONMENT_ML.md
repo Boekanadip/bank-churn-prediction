@@ -104,7 +104,7 @@ python src/train.py
 
 Output yang dihasilkan: file model (`model.pkl`) di folder `src/`.
 
-> Kalau XGBoost gagal terinstall di lokal (`pip install xgboost` error/tidak ada koneksi), script tetap bisa jalan — otomatis hanya memakai Logistic Regression & Random Forest, XGBoost dilewati.
+> XGBoost merupakan dependency wajib karena model production menggunakan XGBoost. Jika XGBoost gagal di-install atau terjadi version mismatch, proses setup harus diperbaiki sebelum menjalankan model serving.
 
 ### Step 6 — Jalankan API Server
 
