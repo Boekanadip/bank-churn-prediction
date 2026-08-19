@@ -46,11 +46,11 @@ class CustomerProfile(BaseModel):
     gender: str
     age: int
     tenure: int
-    balance: float
+    balance: float = Field(..., ge=0, le=900000000)
     products_number: int
     credit_card: int
     active_member: int
-    estimated_salary: float
+    estimated_salary: float = Field(..., ge=0, le=9000000)
 
     class Config:
         json_schema_extra = {
