@@ -1,9 +1,8 @@
 {
 "model_name": "Bank Churn XGBoost",
   "model_type": "XGBClassifier",
-  "xgboost_version": "3.3.0",
-  "sklearn_version": "1.6.1",
-  "python_version": "3.13.2",
+  "xgboost_version": "3.4.0",
+  "sklearn_version": "1.8.0",
   "target": "churn",
   "created_start": "14-08-2026"
 }
