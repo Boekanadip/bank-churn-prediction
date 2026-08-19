@@ -75,7 +75,7 @@ Project menggunakan dataset **Bank Customer Churn Prediction**.
 
 Dataset berisi informasi mengenai karakteristik dan aktivitas nasabah yang digunakan untuk memprediksi status churn.
 
-### Fitur yang Digunakan
+### Fitur
 
 | Fitur              | Deskripsi                             |
 | ------------------ | ------------------------------------- |
