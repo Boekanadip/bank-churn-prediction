@@ -253,19 +253,19 @@ bank-churn-prediction/
 │   └── Bank Customer Churn Prediction.csv
 │
 ├── notebooks/
-│   ├── Bank_Churn_DS_Workflow.ipynb
-│   └── eda_bank_churn.py
+│   ├── churn_predict.py
 │
 ├── src/
 │   ├── model.pkl
 │   ├── preprocessor.pkl
 │   ├── preprocessing.py
+│   ├── metadata.json
 │   └── train.py
 │
 ├── README.md
 ├── requirements.txt
-├── SETUP_ENVIRONMENT_ML.md
-└── LESSON_LEARNED_TEMPLATE.md
+├── setup_environment_ml.md
+└── lesson_learned_template.md
 ```
 
 ### Penjelasan Folder
@@ -274,7 +274,7 @@ bank-churn-prediction/
 | ------------------ | ---------------------------------------------------------------- |
 | `api/`             | Berisi kode FastAPI untuk menyediakan layanan prediksi           |
 | `data/`            | Berisi dataset yang digunakan dalam pengembangan model           |
-| `notebooks/`       | Berisi notebook dan script untuk EDA serta workflow Data Science |
+| `notebooks/`       | Berisi notebook code mulai dari load data - evaluation           |
 | `src/`             | Berisi kode preprocessing, training, serta model artifacts       |
 | `model.pkl`        | Model Machine Learning hasil training                            |
 | `preprocessor.pkl` | Preprocessing pipeline hasil training                            |
