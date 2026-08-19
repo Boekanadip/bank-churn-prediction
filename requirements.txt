@@ -3,8 +3,7 @@ uvicorn[standard]
 pandas
 numpy
 XGBoost==3.3.0
-scikit-learn==1.9.0
+scikit-learn==1.8.0
 joblib
 matplotlib
 seaborn
-Python==3.13.2
