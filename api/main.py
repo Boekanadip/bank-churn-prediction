@@ -103,10 +103,15 @@ def predict_churn(customer: CustomerProfile):
     # yang sama persis seperti waktu training.
     input_df = pd.DataFrame([{
         "credit_score": customer.credit_score,
+        "country": customer.country,
+        "gender": customer.gender,
+        "age": customer.age,
         "tenure": customer.tenure,
         "balance": customer.balance,
         "products_number": customer.products_number,
+        "credit_card": customer.credit_card,
         "active_member": customer.active_member,
+        "estimated_salary": customer.estimated_salary,
     }])
 
     # Preprocessing pakai pipeline yang SAMA seperti waktu training
