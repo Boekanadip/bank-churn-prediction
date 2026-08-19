@@ -1,6 +1,6 @@
-# Lesson Learned — Bank Customer Churn Prediction System
+# Lesson Learned - Bank Customer Churn Prediction System
 
-**Tujuan dokumen:** Mencatat kendala nyata yang dialami selama project (khususnya soal integrasi antar tim ML dan Software Dev), beserta solusinya. Dokumen ini akan jadi basis Knowledge Management System (KMS) untuk onboarding tim di masa depan — jadi tulis dengan asumsi pembacanya adalah orang baru yang belum tahu apa-apa soal project ini.
+**Tujuan dokumen:** Mencatat kendala nyata yang dialami selama project (khususnya soal integrasi antar tim ML dan Software Dev), beserta solusinya. Dokumen ini akan jadi basis Knowledge Management System (KMS) untuk onboarding tim di masa depan - jadi tulis dengan asumsi pembacanya adalah orang baru yang belum tahu apa-apa soal project ini.
 
 > **Cara pakai:** Isi tabel di bawah **selama sprint berjalan**.
 
@@ -12,7 +12,7 @@
 |---|---|---|---|---|---|
 | 17 Agustus | Setup Environment | VS Code sangat lambat / hang saat menjalankan cell pertama kali (proses baca file dataset & start kernel Jupyter tidak kunjung selesai) | Kombinasi 2 faktor: (1) RAM laptop terpakai ~80% oleh aplikasi lain, (2) antivirus/antimalware melakukan real-time scan pada folder project setiap kali file diakses, memperlambat proses baca file dan start kernel | Tambahkan folder project ke exclusion list antivirus (Windows Security → Virus & threat protection → Manage settings → Add or remove exclusions → Add folder project), tutup aplikasi lain yang tidak perlu untuk melonggarkan RAM, lalu restart VS Code | Adib raihan a. |
 | 18 Agustus | Data/Model | Model XGBoost yang dibuat pada environment tertentu mengalami masalah ketika digunakan pada environment dengan versi XGBoost berbeda | Ketidakcocokan versi library antara environment training dan environment serving | Samakan versi XGBoost antara training dan serving serta pin dependency pada requirements.txt | Adib raihan a. |
-| |  | | | | |
+| 19 Agustus | Integrasi API | API gagal start saat menjalankan `uvicorn api.main:app --reload` | File .pkl disimpan (joblib.dump) memakai satu versi scikit-learn (misal 1.8.0), sedangkan environment yang memuatnya (joblib.load) memakai versi berbeda (misal 1.6.1). Format pickle internal scikit-learn tidak dijamin kompatibel antar versi - baik ke versi lebih lama maupun lebih baru | Samakan versi scikit-learn di environment serving dengan versi yang tercatat saat file .pkl dihasilkan: pip install scikit-learn==<versi-yang-sama> Verifikasi dengan pip show scikit-learn sebelum menjalankan ulang uvicorn. | adib |
 | |  | | | | |
 | |  | | | | |
 | |  | | | | |
