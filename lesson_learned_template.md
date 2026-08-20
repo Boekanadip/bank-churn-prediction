@@ -13,7 +13,10 @@
 | 17 Agustus | Setup Environment | VS Code sangat lambat / hang saat menjalankan cell pertama kali (proses baca file dataset & start kernel Jupyter tidak kunjung selesai) | Kombinasi 2 faktor: (1) RAM laptop terpakai ~80% oleh aplikasi lain, (2) antivirus/antimalware melakukan real-time scan pada folder project setiap kali file diakses, memperlambat proses baca file dan start kernel | Tambahkan folder project ke exclusion list antivirus (Windows Security → Virus & threat protection → Manage settings → Add or remove exclusions → Add folder project), tutup aplikasi lain yang tidak perlu untuk melonggarkan RAM, lalu restart VS Code | Adib raihan a. |
 | 18 Agustus | Data/Model | Model XGBoost yang dibuat pada environment tertentu mengalami masalah ketika digunakan pada environment dengan versi XGBoost berbeda | Ketidakcocokan versi library antara environment training dan environment serving | Samakan versi XGBoost antara training dan serving serta pin dependency pada requirements.txt | Adib raihan a. |
 | 19 Agustus | Integrasi API | API gagal start saat menjalankan `uvicorn api.main:app --reload` | File .pkl disimpan (joblib.dump) memakai satu versi scikit-learn (misal 1.8.0), sedangkan environment yang memuatnya (joblib.load) memakai versi berbeda (misal 1.6.1). Format pickle internal scikit-learn tidak dijamin kompatibel antar versi - baik ke versi lebih lama maupun lebih baru | Samakan versi scikit-learn di environment serving dengan versi yang tercatat saat file .pkl dihasilkan: pip install scikit-learn==<versi-yang-sama> Verifikasi dengan pip show scikit-learn sebelum menjalankan ulang uvicorn. | adib |
-| |  | | | | |
+| 19 Agustus | Prediksi tidak reliable | Input test dengan balance dan estimated_salary bernilai jutaan menghasilkan probabilitas churn yang mencurigakan (skor SHAP menunjukkan nilai fitur ter-scale sangat ekstrem, belasan standar deviasi dari rata-rata) | Input test yang dikirim jauh melebihi rentang ini (misal balance = 1.250.000, 5x lipat dari maksimum training). Model melakukan ekstrapolasi ke wilayah data yang belum pernah dipelajari, sehingga hasil prediksi tidak bisa dipercaya meskipun API tidak mengembalikan error. | Tambahkan validasi rentang nilai di skema Pydantic CustomerProfile, contoh:
+`balance: float = Field(..., ge=0, le=300000)`
+`estimated_salary: float = Field(..., ge=0, le=250000)`
+Sehingga input di luar rentang wajar langsung ditolak (HTTP 422) alih-alih menghasilkan prediksi yang menyesatkan. | adib |
 | |  | | | | |
 | |  | | | | |
 
@@ -22,7 +25,7 @@
 ---
 
 ## 2. Kendala Spesifik Integrasi ML ↔ Backend
-
+<a name="unique-anchor-name"></a>
 Bagian ini fokus ke masalah yang paling sering terjadi di project seperti ini — integrasi antara ML Engine (FastAPI) dan Core App (Laravel). Berdasarkan pengalaman nyata tim.
 
 ### 2.1 Ketidakcocokan Format Data
