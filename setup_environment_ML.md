@@ -70,15 +70,15 @@ pip install -r requirements.txt
 Isi `requirements.txt` minimal:
 
 ```
+fastapi
+uvicorn[standard]
 pandas
-numpy
-scikit-learn
+numpy==2.2.6
+xgboost==3.4.0
+scikit-learn==1.8.0
+joblib==1.5.3
 matplotlib
 seaborn
-fastapi
-uvicorn
-pydantic
-joblib
 ```
 
 ### Step 4 — Siapkan Dataset & Model
@@ -152,7 +152,6 @@ Response yang diharapkan sesuai `API_Contract_Churn_Prediction.md`.
 | Port 8000 sudah dipakai | Ada proses lain yang jalan di port yang sama | Jalankan dengan port lain: `uvicorn api.main:app --reload --port 8001` |
 | VS Code sangat lambat / hang saat run cell pertama kali | RAM terpakai tinggi (misal >80%) dan/atau antivirus melakukan real-time scan pada folder project setiap file diakses | 1) Exclude folder project dari antivirus (Windows Security → Virus & threat protection → Manage settings → Add or remove exclusions), 2) tutup aplikasi lain yang tidak perlu, 3) restart VS Code. Kalau masih lambat, pertimbangkan kerjakan tahap EDA/Preprocessing/Training di Google Colab dulu (lihat bagian 0), baru pindah ke lokal khusus untuk API |
 | Error JavaScript di Google Colab (\"Could not load the JavaScript files...\") | Sesi login Google expired, atau browser blokir third-party cookies | Reload halaman, login ulang akun Google, pastikan third-party cookies diizinkan untuk domain google.com, hindari mode Incognito |
-| _(tambahkan sesuai kejadian nyata selama sprint)_ | | |
 
 ---
 
@@ -163,17 +162,19 @@ bank-churn-prediction/
 ├── data/
 │   Bank Customer Churn Prediction.csv
 ├── notebooks/
-│   └── Bank_Churn_DS_Workflow.ipynb # code lengkap mulai dari persiapan-penyimpanan model
-│   └── eda_bank_churn.py # Analisis eksploratif
+│   └── churn_predict.py # code lengkap mulai dari persiapan-penyimpanan model
 ├── src/
 │   ├── preprocessing.py  # Pipeline cleaning, encoding, scaling
 │   ├── preprocessor.pkl  # Untuk Pembersihan inputan 
-│   ├── train.py          # Training & evaluasi model
+│   ├── train.py          # Script
+│   ├── metadata.json     # Catatan versi
 │   └── model.pkl         # Model hasil training (bukan source code, hasil biner)
 ├── api/
 │   └── main.py           # FastAPI app, endpoint /predict
 ├── requirements.txt
-└── README.md              # Dokumen ini
+└── README.md              
+├── setup_environment_ml.md     
+└── lesson_learned_template.md
 ```
 
 ---
@@ -182,5 +183,4 @@ bank-churn-prediction/
 
 | Bagian | Nama | Kontak |
 |---|---|---|
-| ML Engine (keseluruhan) | Adib Raihan Ashidiq | Email: adib.raihann@gmail.com |
-| API Serving | Adib Raihan Ashidiq | Email: adib.raihann@gmail.com |
+| ML Engine & Rest API | Adib Raihan Ashidiq | Email: adib.raihann@gmail.com |
