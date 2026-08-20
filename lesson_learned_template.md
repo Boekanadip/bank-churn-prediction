@@ -27,13 +27,6 @@ Bagian ini fokus ke masalah yang paling sering terjadi di project seperti ini �
 
 ### 2.1 Ketidakcocokan Format Data
 Sempat muncul rencana menyederhanakan endpoint /predict agar hanya menerima 4 field (balance, tenure, products_number, active_member), padahal skema CustomerProfile di main.py, input_df di fungsi predict_churn(), dan kolom yang dipakai preprocessor.pkl saat training harus selalu identik satu sama lain. Kalau salah satu diubah tanpa mengubah dua lainnya, request akan gagal (HTTP 422) atau preprocessor.transform() error. Solusi: analisis feature importance dulu sebelum ubah skema fitur — hasilnya menunjukkan age dan country tetap signifikan, jadi skema 10 fitur dipertahankan.
-### 2.2 Masalah UUID
-
-### 2.3 Response Time / Performance
-_API ML sempat lambat, penyebabnya tidak ada caching._
-
-### 2.4 Error Handling
-
 ---
 
 ## 3. Apa yang Akan Dilakukan Berbeda Kalau Mengulang Project Ini
@@ -41,7 +34,7 @@ _API ML sempat lambat, penyebabnya tidak ada caching._
 Bagian reflektif — tulis di akhir sprint, berdasarkan pengalaman keseluruhan tim.
 
 - **Kalau bisa mulai dari awal lagi, apa yang akan disiapkan lebih dulu?**
-  _sepakati API contract lebih detail sebelum coding dimulai, bukan sambil jalan_
+  _kunci versi library di requirements.txt sejak hari pertama (pakai ==, bukan versi bebas), dan selalu training + serving di environment yang sama — jangan campur Colab dan lokal tanpa menyamakan versi dulu. Ini kendala yang paling sering muncul berulang di project ini. Serta sepakati API contract lebih detail sebelum coding dimulai, bukan sambil jalan_
 
 ---
 
@@ -59,7 +52,6 @@ Bagian reflektif — tulis di akhir sprint, berdasarkan pengalaman keseluruhan t
 
 - **Dokumen/resource yang wajib dibaca duluan** sebelum mulai kerja:
   - `SETUP_ENVIRONMENT_ML.md`
-  - `API_Contract_Churn_Prediction.md`
   - `README.MD`
 
 ---
