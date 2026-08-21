@@ -25,83 +25,17 @@ Data → Data understanding → Cleaning & EDA → Preprocessing → Train/Test 
 
 ---
 
-## Dataset
 
-Project menggunakan dataset "Bank Customer Churn Prediction" https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset. Dataset memuat fitur demografi, saldo, aktivitas, dan flag target `churn`.
+> **Status skema data:** Project ini menggunakan dataset
+> [mathchi/churn-for-bank-customers](https://www.kaggle.com/datasets/mathchi/churn-for-bank-customers)
+> (Kaggle). Kolom asli menggunakan PascalCase (`CustomerId`, `CreditScore`,
+> `Geography`, dst) — lihat bagian **API Contract** di bawah untuk detail
+> penamaan field yang dipakai di request/response.
 
-Contoh fitur:
 
-- `CustomerId` (ID unik, tidak dipakai sebagai fitur model)
-- `CreditScore`, `Age`, `Tenure`, `Balance`, `NumOfProducts`, `EstimatedSalary`
-- `Geography`, `Gender`, `HasCrCard`, `IsActiveMember`
-- `Exited` (target)
+## Struktur Project
 
-Sumber dataset (contoh): https://www.kaggle.com/datasets/gauravtopre/bank-customer-churn-dataset
-
-Catatan: Jangan commit dataset mentah ke repository publik. Gunakan .gitignore untuk mengecualikannya.
-
----
-
-## Instalasi (singkat)
-
-1. Clone repository:
-
-   git clone https://github.com/Boekanadip/bank-churn-prediction.git
-   cd bank-churn-prediction
-
-2. Buat virtual environment dan aktifkan:
-
-   python -m venv .venv
-   # Windows
-   .venv\Scripts\activate
-   # macOS/Linux
-   source .venv/bin/activate
-
-3. Install dependency:
-
-   pip install -r requirements.txt
-
-Catatan: Disarankan mengunci versi pada requirements.txt (pakai `==`) untuk reproducibility.
-
----
-
-## Menjalankan API (FastAPI)
-
-Pastikan artefak model tersedia di `src/`:
-
-- `src/model.pkl`
-- `src/preprocessor.pkl`
-
-Jalankan server:
-
-   uvicorn api.main:app --reload --port 8000
-
-Buka:
-
-- http://127.0.0.1:8000 — root
-- http://127.0.0.1:8000/docs — Swagger UI untuk mencoba endpoint
-
----
-
-## Artefak Model
-
-- `src/model.pkl` — model terlatih (pickle/joblib)
-- `src/preprocessor.pkl` — pipeline preprocessing (fit pada data training)
-
-Keduanya harus kompatibel: jika ada perubahan pada fitur atau preprocessing, lakukan training ulang dan simpan artefak baru.
-
----
-
-## Metode & Evaluasi
-
-Model yang dieksperimenkan antara lain Logistic Regression, Random Forest, dan XGBoost. Evaluasi menggunakan metrik: Accuracy, Precision, Recall, F1-score, ROC-AUC.
-
-Pemilihan model mempertimbangkan lebih dari satu metrik sesuai kebutuhan bisnis.
-
----
-
-## Struktur Project (ringkas)
-
+```
 bank-churn-prediction/
 ├── api/
 │   └── main.py                  # FastAPI serving endpoint
@@ -118,9 +52,103 @@ bank-churn-prediction/
 ├── requirements.txt
 ├── README.md                    # dokumen ini
 ├── setup_environment.md
-└── lesson_learned_template.mdd
+└── lesson_learned_template.md
+```
 
----
+## Quickstart
+
+Ringkas — detail lengkap ada di [`setup_environment.md`](./setup_environment.md).
+
+```bash
+# 1. Buat & aktifkan virtual environment
+python -m venv .venv
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # macOS/Linux
+
+# 2. Install dependency (versi sudah dikunci di requirements.txt)
+pip install -r requirements.txt
+
+# 3. Jalankan preprocessing (hasil tersimpan otomatis ke src/)
+python src/preprocessing.py
+
+# 4. Jalankan training (hasil tersimpan otomatis ke src/)
+python src/train.py
+
+# 5. Jalankan API
+uvicorn api.main:app --reload
+```
+
+Buka `http://127.0.0.1:8000/docs` untuk mencoba endpoint lewat Swagger UI.
+
+## API Contract
+
+### `POST /predict`
+
+**Request body** — field mengikuti penamaan kolom asli dataset (PascalCase):
+
+```json
+{
+  "CustomerId": "15634602",
+  "CreditScore": 650,
+  "Geography": "France",
+  "Gender": "Female",
+  "Age": 42,
+  "Tenure": 5,
+  "Balance": 125000.50,
+  "NumOfProducts": 2,
+  "HasCrCard": 1,
+  "IsActiveMember": 1,
+  "EstimatedSalary": 78000.00
+}
+```
+
+> **Tidak ada field `Surname`/nama nasabah.** Model ML tidak menerima atau
+> memproses data pribadi nasabah. Kalau dashboard perlu menampilkan nama
+> bersama skor risiko, itu digabungkan (`JOIN`) di sisi Laravel/React
+> berdasarkan `CustomerId`, dari data yang sudah tersimpan di database
+> Core App — bukan dikirim ke API ML ini.
+
+**Error responses:**
+
+| Status | Kapan terjadi |
+|---|---|
+| `422 Unprocessable Entity` | Field request salah tipe, hilang, atau di luar rentang valid (lihat `feature_valid_range` di `src/metadata.json`) |
+| `500 Internal Server Error` | Kegagalan internal saat memproses model — cek log server, biasanya karena mismatch versi library atau file `.pkl` tidak konsisten (lihat `lesson_learned_template.md`) |
+
+### `GET /health`
+
+Cek apakah API dan model sudah siap.
+```json
+{ "status": "ok", "model_loaded": true }
+```
+
+## Fitur yang Dipakai Model
+
+| Kolom asli (CSV) | Dipakai sebagai fitur? | Keterangan |
+|---|---|---|
+| `RowNumber` | ❌ | Index baris, dibuang saat load data |
+| `CustomerId` | ❌ (identifier) | Dipakai untuk referensi response, bukan fitur model |
+| `Surname` | ❌ | PII, tidak pernah masuk pipeline ML |
+| `CreditScore` | ✅ | Numerik |
+| `Geography` | ✅ | Kategorikal |
+| `Gender` | ✅ | Kategorikal |
+| `Age` | ✅ | Numerik |
+| `Tenure` | ✅ | Numerik |
+| `Balance` | ✅ | Numerik |
+| `NumOfProducts` | ✅ | Kategorikal |
+| `HasCrCard` | ✅ | Kategorikal |
+| `IsActiveMember` | ✅ | Kategorikal |
+| `EstimatedSalary` | ✅ | Numerik |
+| `Exited` | 🎯 Target | Label yang diprediksi (`churn`) |
+
+Semua 10 fitur (bukan hanya subset) dipertahankan berdasarkan hasil analisis
+feature importance & korelasi — lihat catatan di `notebooks/churn_predict.py`.
+
+## Dokumen Terkait
+
+- [`setup_environment.md`](./setup_environment.md) — cara setup environment ML dari nol
+- [`lesson_learned_template.md`](./lesson_learned_template.md) — kendala teknis yang pernah dialami & solusinya
+- `src/metadata.json` — versi library & metrik model aktif (digenerate otomatis oleh `train.py`)
 
 ## Troubleshooting singkat
 
@@ -139,3 +167,4 @@ Untuk kontribusi: buka issue atau buat pull request. Sertakan deskripsi perubaha
 ## Lisensi
 
 Tambahkan file LICENSE jika diperlukan. Saat ini tidak ada lisensi spesifik pada repo.
+
