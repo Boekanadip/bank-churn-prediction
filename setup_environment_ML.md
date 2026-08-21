@@ -142,8 +142,6 @@ Response yang diharapkan sesuai `API_Contract_Churn_Prediction.md`.
 ---
 
 ## 4. Struktur Folder ML Engine (Sementara)
-
-```
 bank-churn-prediction/
 ├── data/
 │   Churn.csv
@@ -161,7 +159,9 @@ bank-churn-prediction/
 └── README.md              
 ├── setup_environment_ml.md     
 └── lesson_learned_template.md
+
 ```
+
 ## 5. Best practices
 
 - Kunci versi dependency di `requirements.txt`.
