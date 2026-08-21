@@ -21,13 +21,12 @@
 
 ---
 
-## 2. Kendala Spesifik Integrasi ML ↔ Backend
-<a name="customer_id"></a>
+## 2. Kendala Spesifik Integrasi ML - Backend
 Bagian ini fokus ke masalah yang paling sering terjadi di project seperti ini — integrasi antara ML Engine (FastAPI) dan Core App (Laravel). Berdasarkan pengalaman nyata tim.
 
 ### 2.1 Ketidakcocokan Format Data
+
 Sempat muncul rencana menyederhanakan endpoint /predict agar hanya menerima 4 field (balance, tenure, products_number, active_member), padahal skema CustomerProfile di main.py, input_df di fungsi predict_churn(), dan kolom yang dipakai preprocessor.pkl saat training harus selalu identik satu sama lain. Kalau salah satu diubah tanpa mengubah dua lainnya, request akan gagal (HTTP 422) atau preprocessor.transform() error. Solusi: analisis feature importance dulu sebelum ubah skema fitur — hasilnya menunjukkan age dan country tetap signifikan, jadi skema 10 fitur dipertahankan.
----
 
 ## 3. Apa yang Akan Dilakukan Berbeda Kalau Mengulang Project Ini
 
@@ -41,7 +40,7 @@ Bagian reflektif — tulis di akhir sprint, berdasarkan pengalaman keseluruhan t
 ## 4. Rekomendasi untuk Tim Berikutnya (Onboarding)
 
 - **Hal yang harus dilakukan di awal sprint sebelum mulai coding:**
-  1. Diskusikan dengan tim Software Developer, API yang akan diterima serta strukturnya.
+  1. Diskusikan dengan tim Software Developer, API yang akan diterima serta struktur tabel.
   2.
   3.
 
@@ -53,6 +52,7 @@ Bagian reflektif — tulis di akhir sprint, berdasarkan pengalaman keseluruhan t
 - **Dokumen/resource yang wajib dibaca duluan** sebelum mulai kerja:
   - `SETUP_ENVIRONMENT_ML.md`
   - `README.MD`
+  - `lesson_learn_template.md`
 
 ---
 
