@@ -53,7 +53,7 @@ print("Joblib      :", joblib.__version__)
 # (pengganti `files.upload()` yang khusus Colab).
 
 # %%
-DATA_PATH = r"C:\Users\ASUS\Downloads\bank-churn-prediction-main\bank-churn-prediction-main\data\churn.csv"# path lokal kamu
+DATA_PATH = "data\churn.csv"# path kamu
 
 df = pd.read_csv(DATA_PATH)
 print("Jumlah baris & kolom:", df.shape)
