@@ -1,7 +1,9 @@
 # Setup Environment — ML Engine
 
 **Project:** Bank Customer Churn Prediction System
+
 **Bagian:** Machine Learning Engine (Data Science)
+
 **Tujuan dokumen:** Panduan agar siapa pun (termasuk anggota tim baru saat onboarding) bisa menjalankan ML engine dari nol, tanpa harus tanya langsung ke orang yang bikin.
 
 ---
@@ -16,7 +18,7 @@ Berdasarkan pengalaman nyata selama sprint berjalan, ada 2 kemungkinan environme
 | Model Serving (FastAPI) | **Lokal (VS Code)** | FastAPI adalah server yang harus terus menyala menunggu request — tidak cocok dijalankan di dalam cell Colab (Colab akan macet menunggu server berhenti, dan sesi bisa terputus sewaktu-waktu) |
 
 **Alur yang disarankan:**
-1. Kerjakan EDA → Preprocessing → Training di Colab (notebook `.ipynb` yang sudah disiapkan tim DS)
+1. Kerjakan EDA → Preprocessing → Training di Colab (notebook `.py` yang sudah disiapkan tim DS)
 2. Download hasil `model.pkl` dan `preprocessor.pkl` dari Colab (`files.download(...)`)
 3. Pindahkan kedua file itu ke folder `src/` di project lokal
 4. Lanjutkan setup lokal dari **Step 1** di bawah, khusus untuk menjalankan `api/main.py`
@@ -33,6 +35,10 @@ Berdasarkan pengalaman nyata selama sprint berjalan, ada 2 kemungkinan environme
 | pip | terbaru | `pip --version` |
 | Git | any | `git --version` |
 
+Cek versi:
+- python --version
+- pip --version
+- git --version
 ---
 
 ## 2. Langkah Setup dari Nol
@@ -116,26 +122,6 @@ Setelah jalan, cek:
 - API aktif di: `http://localhost:8000`
 - Dokumentasi otomatis (Swagger UI): `http://localhost:8000/docs` — bisa dipakai untuk test endpoint langsung dari browser tanpa Postman
 
-### Step 7 — Tes Endpoint
-
-Contoh test pakai `curl`, atau langsung lewat Swagger UI di `/docs`:
-
-```bash
-curl -X POST http://localhost:8000/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "customer_id": "a1b2c3d4-e5f6-47a8-9b12-cd34ef567890",
-    "credit_score": 650,
-    "country": "France",
-    "gender": "Female",
-    "age": 42,
-    "tenure": 5,
-    "balance": 125000.50,
-    "products_number": 2,
-    "credit_card": 1,
-    "active_member": 1,
-    "estimated_salary": 78000.00
-  }'
 ```
 
 Response yang diharapkan sesuai `API_Contract_Churn_Prediction.md`.
@@ -160,9 +146,9 @@ Response yang diharapkan sesuai `API_Contract_Churn_Prediction.md`.
 ```
 bank-churn-prediction/
 ├── data/
-│   Bank Customer Churn Prediction.csv
+│   Churn.csv
 ├── notebooks/
-│   └── churn_predict.py # code lengkap mulai dari persiapan-penyimpanan model
+│   └── churn_predict.py # code mulai dari persiapan-penyimpanan model
 ├── src/
 │   ├── preprocessing.py  # Pipeline cleaning, encoding, scaling
 │   ├── preprocessor.pkl  # Untuk Pembersihan inputan 
@@ -176,11 +162,17 @@ bank-churn-prediction/
 ├── setup_environment_ml.md     
 └── lesson_learned_template.md
 ```
+## 5. Best practices
+
+- Kunci versi dependency di `requirements.txt`.
+- Simpan metadata training di `src/metadata.json` (isi: versi library, tanggal training, model_version).
+- Untuk reproducibility, pertimbangkan Dockerfile yang menjalankan environment yang sama untuk training & serving.
+- Jangan commit dataset mentah ke repo publik.
 
 ---
 
-## 5. Kontak / Penanggung Jawab
+## 6. Kontak / Penanggung Jawab
 
 | Bagian | Nama | Kontak |
 |---|---|---|
-| ML Engine & Rest API | Adib Raihan Ashidiq | Email: adib.raihann@gmail.com |
+| ML Engine & Rest API | Adib Raihan A. | Email: adib.raihann@gmail.com |
