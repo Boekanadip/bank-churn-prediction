@@ -122,11 +122,6 @@ Setelah jalan, cek:
 - API aktif di: `http://localhost:8000`
 - Dokumentasi otomatis (Swagger UI): `http://localhost:8000/docs` — bisa dipakai untuk test endpoint langsung dari browser tanpa Postman
 
-```
-
-Response yang diharapkan sesuai `API_Contract_Churn_Prediction.md`.
-
----
 
 ## 3. Masalah Umum & Solusi (FAQ Setup)
 
