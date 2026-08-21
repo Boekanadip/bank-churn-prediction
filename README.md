@@ -101,17 +101,23 @@ Pemilihan model mempertimbangkan lebih dari satu metrik sesuai kebutuhan bisnis.
 ---
 
 ## Struktur Project (ringkas)
-
 bank-churn-prediction/
-
-├── api/ (FastAPI)
-├── data/ (dataset)
-├── notebooks/ (EDA / eksperimen)
-├── src/ (preprocessing, train, artefak model)
+├── api/
+│   └── main.py                  # FastAPI serving endpoint
+├── data/
+│   └── Churn_Modelling.csv      # dataset mentah
+├── notebooks/
+│   └── churn_predict.py         # EDA (Exploratory Data Analysis)
+├── src/
+│   ├── preprocessing.py         # pipeline preprocessing (fit & save)
+│   ├── train.py                 # training & evaluasi model
+│   ├── preprocessor.pkl         # (hasil generate, jangan commit manual)
+│   ├── model.pkl                # (hasil generate, jangan commit manual)
+│   └── metadata.json            # (hasil generate) versi & metrik model aktif
 ├── requirements.txt
-├── README.md
-├── setup_environment_ML.md
-└── lesson_learned_template.md
+├── README.md                    # dokumen ini
+├── setup_environment.md
+└── lesson_learned_template.mdd
 
 ---
 
