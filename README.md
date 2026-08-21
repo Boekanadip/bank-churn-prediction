@@ -27,10 +27,9 @@ Data → Data understanding → Cleaning & EDA → Preprocessing → Train/Test 
 
 
 > **Status skema data:** Project ini menggunakan dataset
-> [mathchi/churn-for-bank-customers](https://www.kaggle.com/datasets/mathchi/churn-for-bank-customers)
+> [Mehmet Akturk/Churn for Bank Customers] https://www.kaggle.com/datasets/mathchi/churn-for-bank-customers
 > (Kaggle). Kolom asli menggunakan PascalCase (`CustomerId`, `CreditScore`,
-> `Geography`, dst) — lihat bagian **API Contract** di bawah untuk detail
-> penamaan field yang dipakai di request/response.
+> `Geography`, dst)
 
 
 ## Struktur Project
