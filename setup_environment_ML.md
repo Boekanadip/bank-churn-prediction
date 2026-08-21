@@ -135,28 +135,7 @@ Setelah jalan, cek:
 | Error JavaScript di Google Colab (\"Could not load the JavaScript files...\") | Sesi login Google expired, atau browser blokir third-party cookies | Reload halaman, login ulang akun Google, pastikan third-party cookies diizinkan untuk domain google.com, hindari mode Incognito |
 
 
-## 4. Struktur Folder ML Engine (Sementara)
-bank-churn-prediction/
-├── data/
-│   Churn.csv
-├── notebooks/
-│   └── churn_predict.py # code mulai dari persiapan-penyimpanan model
-├── src/
-│   ├── preprocessing.py  # Pipeline cleaning, encoding, scaling
-│   ├── preprocessor.pkl  # Untuk Pembersihan inputan 
-│   ├── train.py          # Script
-│   ├── metadata.json     # Catatan versi
-│   └── model.pkl         # Model hasil training (bukan source code, hasil biner)
-├── api/
-│   └── main.py           # FastAPI app, endpoint /predict
-├── requirements.txt
-└── README.md              
-├── setup_environment_ml.md     
-└── lesson_learned_template.md
-
-```
-
-## 5. Best practices
+## 4. Best practices
 
 - Kunci versi dependency di `requirements.txt`.
 - Simpan metadata training di `src/metadata.json` (isi: versi library, tanggal training, model_version).
@@ -165,7 +144,7 @@ bank-churn-prediction/
 
 ---
 
-## 6. Kontak / Penanggung Jawab
+## 5. Kontak / Penanggung Jawab
 
 | Bagian | Nama | Kontak |
 |---|---|---|
