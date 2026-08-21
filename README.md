@@ -81,32 +81,6 @@ Buka:
 - http://127.0.0.1:8000 — root
 - http://127.0.0.1:8000/docs — Swagger UI untuk mencoba endpoint
 
-Contoh request POST /predict (JSON):
-
-{
-  "customer_id": "a1b2c3d4",
-  "credit_score": 650,
-  "country": "France",
-  "gender": "Female",
-  "age": 42,
-  "tenure": 5,
-  "balance": 125000.50,
-  "products_number": 2,
-  "credit_card": 1,
-  "active_member": 1,
-  "estimated_salary": 78000.00
-}
-
-Contoh response (format):
-
-{
-  "customer_id": "a1b2c3d4",
-  "churn_probability": 0.7345,
-  "churn_percentage": 73,
-  "risk_level": "Merah",
-  "model_version": "v1.0-xgboost"
-}
-
 ---
 
 ## Artefak Model
