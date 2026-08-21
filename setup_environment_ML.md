@@ -139,7 +139,6 @@ Response yang diharapkan sesuai `API_Contract_Churn_Prediction.md`.
 | VS Code sangat lambat / hang saat run cell pertama kali | RAM terpakai tinggi (misal >80%) dan/atau antivirus melakukan real-time scan pada folder project setiap file diakses | 1) Exclude folder project dari antivirus (Windows Security → Virus & threat protection → Manage settings → Add or remove exclusions), 2) tutup aplikasi lain yang tidak perlu, 3) restart VS Code. Kalau masih lambat, pertimbangkan kerjakan tahap EDA/Preprocessing/Training di Google Colab dulu (lihat bagian 0), baru pindah ke lokal khusus untuk API |
 | Error JavaScript di Google Colab (\"Could not load the JavaScript files...\") | Sesi login Google expired, atau browser blokir third-party cookies | Reload halaman, login ulang akun Google, pastikan third-party cookies diizinkan untuk domain google.com, hindari mode Incognito |
 
----
 
 ## 4. Struktur Folder ML Engine (Sementara)
 bank-churn-prediction/
